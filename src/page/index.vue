@@ -15,11 +15,11 @@
 								<el-menu-item index="index_left1">选项1</el-menu-item>
 								<el-menu-item index="index_left2">选项2</el-menu-item>
 								<el-menu-item index="index_left3">选项3</el-menu-item>
+								<el-menu-item index="echars1">选项3</el-menu-item>
 							</el-menu-item-group>
-							
+
 						</el-submenu>
-						
-						
+
 					</el-menu>
 				</el-aside>
 				<el-main>

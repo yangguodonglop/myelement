@@ -24,16 +24,17 @@
 			</el-table-column>
 			<el-table-column label="操作选择" width="300">
 				<template scope="scope">
+					<el-button type="primary" class="new_btn1" @click="dialogVisible4(scope.$index, scope.row)">新增</el-button>
 					<el-button type="primary" class="new_btn1" @click="dialogVisible1(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="primary" class="new_btn2">删除</el-button>
+					<el-button type="primary" class="new_btn2" @click="dialogVisible3(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
-		<el-dialog class="new_input" title="填写表单" :visible.sync="dialogVisible" width="30%" >
+		<el-dialog class="new_input" title="填写表单" :visible.sync="dialogVisible" width="30%">
 			<span>请修改你想要的信息</span>
 			<el-form :model="editForm" label-width="80px" ref="editForm">
 				<el-form-item label="用户ID" prop="id">
-					<el-input v-model="editForm.id" auto-complete="off" :disabled="true" ></el-input>
+					<el-input v-model="editForm.id" auto-complete="off" :disabled="true"></el-input>
 				</el-form-item>
 				<el-form-item label="用户名称" prop="name">
 					<el-input v-model="editForm.name" auto-complete="off"></el-input>
@@ -56,7 +57,8 @@
 			</el-form>
 			<span slot="footer" class="dialog-footer">
 			    <el-button @click="dialogVisible = false">取 消</el-button>
-			    <el-button type="primary" @click="dialogVisible2">确 定</el-button>
+			    <el-button type="primary" @click="dialogVisible2" v-if="ok_one">确 定</el-button>
+			    <el-button type="primary" @click="dialogVisible22" v-if="ok_two">确 定1</el-button>
  			 </span>
 		</el-dialog>
 	</div>
@@ -69,26 +71,28 @@
 		data() {
 			return {
 				dialogVisible: false,
+				ok_one: false,
+				ok_two: false,
 				tableData: [
 
 				],
-				input1:"收货人",
-				input2:"联系电话",
-				input3:"请输入省",
-				input4:"请输入市",
-				input5:"请输入区",
-				input6:"请输入具体地址",
+				input1: "收货人",
+				input2: "联系电话",
+				input3: "请输入省",
+				input4: "请输入市",
+				input5: "请输入区",
+				input6: "请输入具体地址",
 				editForm: {
-					id:"34",
-					phone: "15951813234",
-					name: '杨国栋',
-					province:"大雁",
-					city: '宜昌',
-					area:'长阳',
-					address:"大堰乡"
+					id: "请输入ID",
+					phone: "请输入电话号码",
+					name: '请输入名字',
+					province: "请输入省",
+					city: '请输入市',
+					area: '请输入县',
+					address: "请输入详细地址"
 				}
 			}
-			
+
 		},
 		mounted: function() {
 			let _this = this
@@ -106,52 +110,142 @@
 			})
 		},
 		methods: {
-		dialogVisible1:function(index,row){
-			let _this=this;
-			_this.dialogVisible=true
-//			var item_id = sessionStorage.getItem('item_id');
-//			console.log(item_id)
-			_this.editForm = Object.assign({}, row);
-		},
-		dialogVisible2:function(){
-			let _this=this;
-			var token = localStorage.getItem('token');
-			_this.dialogVisible=false;
-			
+			dialogVisible1: function(index, row) {
+				let _this = this;
+				_this.ok_one = true;
+				_this.ok_two = false;
+				_this.dialogVisible = true
+				//			var item_id = sessionStorage.getItem('item_id');
+				//			console.log(item_id)
+				_this.editForm = Object.assign({}, row);
+			},
+			dialogVisible2: function() {
+				let _this = this;
+				var token = localStorage.getItem('token');
+				_this.dialogVisible = false;
+
 				const url = 'http://mapi.xinlv123.com/xltx/updateAddress'
-				alert(url)
 				var params = new URLSearchParams();
+				params.append('address_id', _this.editForm.id); //你要传给后台的参数值 key/value
 				params.append('name', _this.editForm.name); //你要传给后台的参数值 key/value
 				params.append('phone', _this.editForm.phone);
-				params.append('province',_this.editForm.province);
+				params.append('province', _this.editForm.province);
 				params.append('city', _this.editForm.city); //你要传给后台的参数值 key/value
 				params.append('area', _this.editForm.area);
-				params.append('address',_this.editForm.address);
-				alert(token)
+				params.append('address', _this.editForm.address);
 				_this.$axios({
-						method: 'post',
-						url: url,
-						data: params,
+					method: 'post',
+					url: url,
+					data: params,
+					headers: {
+						Authorization: 'Bearer ' + token
+					}
+				}).then(function(response) {
+
+					console.log("到这里咯")
+					var token = localStorage.getItem('token');
+					_this.$axios.get('http://mapi.xinlv123.com/xltx' + '/addressList', {
 						headers: {
 							Authorization: 'Bearer ' + token
 						}
-					}).then(function(response){
-						alert("成功")
-					}).catch(function(response){
+					}).then(function(response) {
+						console.log(response)
+						_this.tableData = response.data.data;
+						console.log(response)
+					}).catch(function(response) {
 						alert("失败")
 					})
-//			_this.$axios.get('http://mapi.xinlv123.com/xltx' + '/address/details?address_id=' + _this.editForm.id, {
-//			headers: {
-//					Authorization: 'Bearer ' + token
-//				}
-//			}).then(function(response) {
-//			//_this.tableData = response.data;
-//				console.log(response)
-//			}, function(err) {
-//				alert('网络异常!');
-//			})
-		}
-		
+
+				}).catch(function(response) {
+					alert("失败")
+				})
+
+			},
+			dialogVisible3: function(index, row) {
+				let _this = this
+				_this.editForm = Object.assign({}, row);
+				var params = new URLSearchParams();
+				var token = localStorage.getItem('token');
+				params.append('address_id', _this.editForm.id);
+				const url = 'http://mapi.xinlv123.com/xltx/deleteAddress'
+				_this.$axios({
+					method: 'post',
+					url: url,
+					data: params,
+					headers: {
+						Authorization: 'Bearer ' + token
+					}
+				}).then(function(response) {
+					console.log("成功")
+					//let _this = this
+					var token = localStorage.getItem('token');
+					_this.$axios.get('http://mapi.xinlv123.com/xltx' + '/addressList', {
+						headers: {
+							Authorization: 'Bearer ' + token
+						}
+					}).then(function(response) {
+						console.log(response)
+						_this.tableData = response.data.data;
+						console.log(response)
+					}).catch(function(response) {
+						alert("失败")
+					})
+
+				}).catch(function(response) {
+					alert("失败")
+				})
+
+			},
+			dialogVisible4: function() {
+				let _this = this
+				_this.ok_one = false;
+				_this.ok_two = true;
+				_this.dialogVisible = true
+
+			},
+			dialogVisible22: function() {
+
+				let _this = this
+				_this.dialogVisible = false
+				var token = localStorage.getItem('token');
+
+				const url = 'http://mapi.xinlv123.com/xltx/storeAddress'
+				var params = new URLSearchParams();
+				//				params.append('address_id', _this.editForm.id); //你要传给后台的参数值 key/value
+				params.append('name', _this.editForm.name); //你要传给后台的参数值 key/value
+				params.append('phone', _this.editForm.phone);
+				params.append('province', _this.editForm.province);
+				params.append('city', _this.editForm.city); //你要传给后台的参数值 key/value
+				params.append('area', _this.editForm.area);
+				params.append('address', _this.editForm.address);
+				_this.$axios({
+					method: 'post',
+					url: url,
+					data: params,
+					headers: {
+						Authorization: 'Bearer ' + token
+					}
+				}).then(function(response) {
+
+					console.log("到这里咯")
+					var token = localStorage.getItem('token');
+					_this.$axios.get('http://mapi.xinlv123.com/xltx' + '/addressList', {
+						headers: {
+							Authorization: 'Bearer ' + token
+						}
+					}).then(function(response) {
+						console.log(response)
+						_this.tableData = response.data.data;
+						console.log(response)
+					}).catch(function(response) {
+						alert("失败")
+					})
+
+				}).catch(function(response) {
+					alert("失败")
+				})
+			}
+
 		}
 	}
 </script>
@@ -216,7 +310,9 @@
 		text-align: center;
 		white-space: inherit;
 	}
-	.new_input input{
-/*		margin-top: 20px;
-*/	}
+	
+	.new_input input {
+		/*		margin-top: 20px;
+*/
+	}
 </style>

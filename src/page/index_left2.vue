@@ -7,9 +7,9 @@
 		<el-table-column prop="buy_num" label="购买数量" width="180">
 		</el-table-column>
 		<el-table-column prop="thumb" label="商品图片" width="180">
-			 <template slot-scope="scope">
-    		  	<img  :src="scope.row.thumb" alt="" style="width:80px;height: 80px">
-   			 </template>
+			<template slot-scope="scope">
+				<img :src="scope.row.thumb" alt="" style="width:80px;height: 80px">
+			</template>
 		</el-table-column>
 		<el-table-column prop="title" label="商品标题">
 		</el-table-column>
@@ -23,32 +23,32 @@
 			return {
 
 				tableData: [
-//				{
-//					date: '2016-05-02',
-//					name: '王小虎',
-//					address: '上海市普陀区金沙江路 1518 弄'
-//				}, {
-//					date: '2016-05-04',
-//					name: '王小虎',
-//					address: '上海市普陀区金沙江路 1517 弄'
-//				}, {
-//					date: '2016-05-01',
-//					name: '王小虎',
-//					address: '上海市普陀区金沙江路 1519 弄'
-//				}, {
-//					date: '2016-05-03',
-//					name: '王小虎',
-//					address: '上海市普陀区金沙江路 1516 弄'
-//				}
+					//				{
+					//					date: '2016-05-02',
+					//					name: '王小虎',
+					//					address: '上海市普陀区金沙江路 1518 弄'
+					//				}, {
+					//					date: '2016-05-04',
+					//					name: '王小虎',
+					//					address: '上海市普陀区金沙江路 1517 弄'
+					//				}, {
+					//					date: '2016-05-01',
+					//					name: '王小虎',
+					//					address: '上海市普陀区金沙江路 1519 弄'
+					//				}, {
+					//					date: '2016-05-03',
+					//					name: '王小虎',
+					//					address: '上海市普陀区金沙江路 1516 弄'
+					//				}
 				]
 			}
 		},
-		mounted:function(){
-				axios.get('http://mapi.xinlv123.com/xltx/mobile/recommend').then((responese) => {
+		mounted: function() {
+			axios.get('http://mapi.xinlv123.com/xltx/mobile/recommend').then((responese) => {
 				this.tableData = responese.data.data.tour_around
-//				this.dt2 = responese.data.data.abroad
-//				this.dt3 = responese.data.data.abroad
-//				this.dt4 = responese.data.data.abroad
+				//				this.dt2 = responese.data.data.abroad
+				//				this.dt3 = responese.data.data.abroad
+				//				this.dt4 = responese.data.data.abroad
 				console.log(this.tableData)
 
 			}).catch((err) => {
@@ -102,7 +102,8 @@
 	.my_ele_div {
 		color: red;
 	}
-	.el-table th{
+	
+	.el-table th {
 		text-align: center;
 	}
 </style>

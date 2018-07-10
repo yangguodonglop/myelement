@@ -59,7 +59,7 @@
 							localStorage.expired_at = response.data.data.expired_at; //过期时间
 							localStorage.refresh_expired_at = response.data.data.refresh_expired_at; //刷新时间
 							localStorage.userstatus = true;
-								
+
 							_this.$router.push({
 								path: '/index'
 							})

@@ -5,15 +5,19 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 import querystring from 'querystring'
+
+
 Vue.prototype.$qs = querystring;
 import axios from 'axios';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.$axios = axios;
 
-import  VueResource  from 'vue-resource'
-
-Vue.use(VueResource) 
+//import  VueResource  from 'vue-resource'
+//
+//Vue.use(VueResource) 
 
 	Vue.use(Element)
 
