@@ -48,6 +48,7 @@
 						data: params
 					})
 					.then(function(response) {
+						console.log(response)
 						if(response.status === 200) {
 							if(response.body.status === 0) {
 
@@ -55,11 +56,21 @@
 						}
 						if(response.status === 201) {
 							//let _this=this
+							var nowtoken=response.data.data.token
 							localStorage.token = response.data.data.token; //token
 							localStorage.expired_at = response.data.data.expired_at; //过期时间
 							localStorage.refresh_expired_at = response.data.data.refresh_expired_at; //刷新时间
 							localStorage.userstatus = true;
-
+							console.log("888888")
+							 _this.$axios.get("http://mapi.xinlv123.com/xltx/mobile/customerInfo",{headers :{Authorization: 'Bearer '+nowtoken}})
+							.then((response)=>{
+								
+								var nowusername=response.data.data.name
+								
+								localStorage.setItem("nowusername",nowusername)
+							}).catch((response)=>{
+								console.log("失败")
+							})
 							_this.$router.push({
 								path: '/index'
 							})
@@ -70,38 +81,7 @@
 					.catch(function(error) {
 						console.log(error);
 					});
-				//				.then((res) => {
-				//					console.log("失败111")
-				//				
-				////					if(res.status === 200){
-				////						if(response.body.status === 0){
-				////						
-				////						}
-				////					}
-				////					if(res.status === 201){
-				////						alert("222")
-				////						//let _this=this
-				////						localStorage.token = response.body.data.token;//token
-				////						localStorage.expired_at = response.body.data.expired_at;//过期时间
-				////						localStorage.refresh_expired_at = response.body.data.refresh_expired_at;//刷新时间
-				////						localStorage.userstatus = true;
-				////							this.$router.push({path:'/index'})
-				////						
-				////						
-				////						//window.location.href = "/user/index.html";
-				////					}
-				//				}).catch((res) => {
-				//					console.log("失败")
-				//});
-				//				axios.post('', this.$qs.stringify(data)).then((responese) => {
-				//					console.log(response)
-				//					//				this.dt2 = responese.data.data.abroad
-				//					//				this.dt3 = responese.data.data.abroad
-				//					//				this.dt4 = responese.data.data.abroad
-				//
-				//				}).catch((err) => {
-				//					console.log("失败")
-				//				})
+
 			}
 		}
 	}

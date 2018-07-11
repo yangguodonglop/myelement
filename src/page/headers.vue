@@ -8,9 +8,10 @@
 			</el-col>
 			<!--<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
 				  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-			<el-col :span="3" class="header_con_r">
+			<el-col :span="5" class="header_con_r">
 				<div class="grid-content bg-purple">
-					<a href="#"><img src="../assets/images/img_logo.png"></a>
+					<div class="user_img"><img src="../assets/images/11111.png"></div>
+					<div class="user_txt">{{user_name}}</div>
 				</div>
 			</el-col>
 		</el-row>
@@ -28,6 +29,13 @@
 </template>
 
 <script>
+	export default{
+		data(){
+			return{
+				user_name:localStorage.getItem("nowusername")
+			}
+		}
+	}
 </script>
 
 <style>
@@ -51,10 +59,33 @@
 		/*display: flex;
     align-items: center;*/
 	}
+	.user_img{
+		width:60px;
+		height: 60px;
+		line-height: 60px;
+		float: left;
+	}
+	.user_txt{
+		width: auto;
+		float: left;
+		line-height: 60px;
+	}
 	
 	.bg-purple img {
-		height: 40px;
+		height: auto;
+		width: auto;
+
+		overflow: hidden;
+		vertical-align: middle;
 	}
+	.user_img img {
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+
 	
 	.bg-purple-light {
 		background: #e5e9f2;
