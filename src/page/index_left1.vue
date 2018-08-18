@@ -1,19 +1,27 @@
 <template>
-	<el-table :data="tableData" style="width: 100%">
-		<el-table-column prop="id" label="商品ID" width="180">
-		</el-table-column>
-		<el-table-column prop="price" label="商品价格" width="180">
-		</el-table-column>
-		<el-table-column prop="buy_num" label="购买数量" width="180">
-		</el-table-column>
-		<el-table-column prop="thumb" label="商品图片" width="180">
-			<template slot-scope="scope">
-				<img :src="scope.row.thumb" alt="" style="width:80px;height: 80px">
-			</template>
-		</el-table-column>
-		<el-table-column prop="title" label="商品标题">
-		</el-table-column>
-	</el-table>
+	<el-container>
+		<!--<el-row style="width:100%;height: 50px;">
+ 		 <el-col :span="24"><div class="grid-content bg-purple-dark">11111</div></el-col>
+	</el-row>-->
+		<el-table :data="tableData" style="width: 100%">
+			<el-table-column prop="id" label="商品ID" width="180">
+			</el-table-column>
+			<el-table-column prop="price" label="商品价格" width="180">
+			</el-table-column>
+			<el-table-column prop="buy_num" label="购买数量" width="180">
+			</el-table-column>
+			<el-table-column prop="thumb" label="商品图片" width="180">
+				<template slot-scope="scope">
+					<img :src="scope.row.thumb" alt="" style="width:80px;height: 80px">
+				</template>
+			</el-table-column>
+			<el-table-column prop="title" label="商品标题">
+			</el-table-column>
+
+		</el-table>
+
+	</el-container>
+
 </template>
 
 <script>
@@ -21,7 +29,7 @@
 	export default {
 		data() {
 			return {
-
+				txt: '8888888',
 				tableData: [
 					//				{
 					//					date: '2016-05-02',

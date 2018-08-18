@@ -7,6 +7,7 @@ import index_left2 from '@/page/index_left2'
 import index_left3 from '@/page/index_left3'
 import login from '@/page/login'
 import echars1 from '@/page/echars1'
+import wuliu from '@/page/wuliu.vue'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
 					path:'/echars1',
 					name:'/echars1',
 					component:echars1
+				},
+				{
+					path:'/wuliu',
+					name:wuliu,
+					component:wuliu 
 				}
 			]
 		},{

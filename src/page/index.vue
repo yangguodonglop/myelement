@@ -4,6 +4,7 @@
 		<el-container>
 			<el-header>
 				<headers></headers>
+			
 			</el-header>
 			<el-container>
 				<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -12,24 +13,15 @@
 							<template slot="title"><i class="el-icon-message"></i>导航一</template>
 							<el-menu-item-group>
 								<template slot="title">分组一</template>
-								<el-menu-item index="index_left1">选项1</el-menu-item>
-								<el-menu-item index="index_left2">选项2</el-menu-item>
-								<el-menu-item index="index_left3">选项3</el-menu-item>
-								<el-menu-item index="echars1">选项4</el-menu-item>
+								<el-menu-item index="index_left1">商品查询1</el-menu-item>
+								<el-menu-item index="index_left2">商品查询2</el-menu-item>
+								<el-menu-item index="index_left3">增删改查</el-menu-item>
+								<el-menu-item index="echars1">echars图标</el-menu-item>
+								<el-menu-item index="wuliu">物流查询</el-menu-item>
 							</el-menu-item-group>
 
 						</el-submenu>
-						<el-submenu index="1">
-							<template slot="title"><i class="el-icon-message"></i>导航一</template>
-							<el-menu-item-group>
-								<template slot="title">分组一</template>
-								<el-menu-item index="index_left1">选项1</el-menu-item>
-								<el-menu-item index="index_left2">选项2</el-menu-item>
-								<el-menu-item index="index_left3">选项3</el-menu-item>
-								<el-menu-item index="echars1">选项4</el-menu-item>
-							</el-menu-item-group>
-
-						</el-submenu>
+					
 
 					</el-menu>
 				</el-aside>
@@ -53,6 +45,8 @@
 	import Element from 'element-ui'
 	import 'element-ui/lib/theme-chalk/index.css'
 	import headers from './headers'
+	
+
 	import indexleft from './indexleft'
 	import indexright from './indexright'
 	Vue.use(Element)
@@ -68,6 +62,7 @@
 			headers,
 			indexleft,
 			indexright
+		
 		},
 	}
 </script>

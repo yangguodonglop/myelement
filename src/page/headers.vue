@@ -6,14 +6,27 @@
 					<a href="#"><img src="../assets/images/img_logo.png"></a>
 				</div>
 			</el-col>
+			<el-col :span="3" class="header_con_r">
+				<!--<counter1 num="101"></counter1>-->
+			</el-col>
+				<el-col :span="3" class="header_con_r">			
+				<!--<p class="p1">子传父{{numchild}}</p>-->
+			</el-col>
+			<el-col :span="3" class="header_con_r">
+				<!--<counter2 v-bind:numchild="numchild" v-on:clickadd="add_tab" v-on:clickreduce="reduce"></counter2>-->
+			</el-col>
+		
 			<!--<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
 				  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
 			<el-col :span="5" class="header_con_r">
 				<div class="grid-content bg-purple">
 					<div class="user_img"><img src="../assets/images/11111.png"></div>
-					<div class="user_txt">{{user_name}}</div>
+					<div class="user_txt">{{user_name}}1
+					
+					</div>
 				</div>
 			</el-col>
+			
 		</el-row>
 		<!--<el-col >
 					<el-menu default-active="5" class="el-menu-demo" mode="horizontal" @select="">
@@ -29,17 +42,36 @@
 </template>
 
 <script>
+	import Vue from 'vue'
+//	import counter1 from './childsone'
+//	import counter2 from './childsone1'
 	export default{
 		data(){
 			return{
-				user_name:localStorage.getItem("nowusername")
+				user_name:localStorage.getItem("nowusername"),
+				numchild:100
+			}
+		},
+		components:{
+//			counter1,
+//			counter2
+		},
+		methods:{
+			add_tab:function(){
+				let _this=this
+				_this.numchild++
+			},
+			reduce:function(){
+				let _this=this
+				_this.numchild--
 			}
 		}
 	}
 </script>
 
-<style>
-	<style>.el-row {
+
+	<style>
+		.el-row {
 		margin-bottom: 20px;
 		&:last-child {
 			margin-bottom: 0;
@@ -110,5 +142,8 @@
 	.header_con_r {
 		float: right;
 	}
-</style>
+	.p1{
+		color: #409EFF;
+		float: left;
+	}
 </style>

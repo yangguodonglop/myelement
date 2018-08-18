@@ -9,6 +9,15 @@ import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 import querystring from 'querystring'
 
+import {Select,Option,Dialog,Button} from 'element-ui'
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Dialog)
+Vue.use(Button)
+// Vue.component(Select.name,Select);
+// 或写为Vue.use(Button)
+/* 导入第三方库结束 */
+
 
 Vue.prototype.$qs = querystring;
 import axios from 'axios';
